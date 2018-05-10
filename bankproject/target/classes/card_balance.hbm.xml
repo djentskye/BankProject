@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name = "com.hibernate.maven.backend.databaseInfo.CardBalance" table = "card_balance">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="incriment" />  <!--Necessary?-->
+        </id>
+
+        <property name="cardId" type="int">
+            <column name="card_id"/>
+        </property>
+
+        <property name="balance" type="int">
+            <column name="balance"/>
+        </property>
+    </class>
+
+
+</hibernate-mapping>
