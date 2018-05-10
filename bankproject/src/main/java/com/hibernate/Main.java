@@ -9,7 +9,7 @@ import org.hibernate.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void performTransaction() {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         session.beginTransaction();
@@ -18,5 +18,9 @@ public class Main {
         //Set info for our classes and use session.save(CLASSNAME); to save them
 
         session.getTransaction().commit();
+    }
+
+    public static void main(String[] args) {
+        //Get general input, perform transaction, etc.
     }
 }
