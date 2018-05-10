@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
 
-    <class name = "com.hibernate.maven.backend.databaseInfo.CardBalance" table = "card_balance">
+    <class name = "com.hibernate.entity.CardBalance" table = "card_balance">
         <id name="id" type="int">
             <column name="id" />
             <generator class="incriment" />  <!--Necessary?-->
