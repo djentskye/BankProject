@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
 
-    <class name = "com.hibernate.maven.backend.databaseInfo.CardData" table = "card_data">
+    <class name = "com.hibernate.entity.Card" table = "card">
         <id name="id" type="int">
             <column name="id" />
             <generator class="incriment" />  <!--Necessary?-->
@@ -15,16 +15,12 @@
             <column name="user_id"/>
         </property>
 
-        <property name="name" type="java.lang.String">
-            <column name="name"/>
+        <property name="cardNumber" type="java.lang.String">
+            <column name="card_number"/>
         </property>
 
-        <property name="passNum" type="int">
-            <column name="passport_number"/>
-        </property>
-
-        <property name="signupDate" type="timestamp">
-            <column name="signup_date"/>
+        <property name="balance" type="double">
+            <column name="balance"/>
         </property>
     </class>
 

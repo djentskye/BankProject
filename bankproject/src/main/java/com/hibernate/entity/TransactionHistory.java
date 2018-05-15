@@ -1,21 +1,21 @@
 package com.hibernate.entity;
 
-import java.util.Date;
+import com.hibernate.transactionType;
 
 public class TransactionHistory implements java.io.Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; //???
 
     private int id;
     private int cardId;
     private int amt;
-    private String type;
+    private transactionType type;
 
     public TransactionHistory() {
 
     }
 
-    public TransactionHistory(int cardId, int amt, String type) {
+    public TransactionHistory(int cardId, int amt, transactionType type) {
         this.cardId = cardId;
         this.amt = amt;
         this.type = type;
@@ -45,11 +45,11 @@ public class TransactionHistory implements java.io.Serializable {
         this.amt = amt;
     }
 
-    public String getType() {
+    public transactionType getType() {
         return this.type;
     }
 
-    public void setType(String type) {
+    public void setType(transactionType type) {
         this.type = type;
     }
 }
