@@ -6,37 +6,21 @@ public class CardData implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int id;
-    private int userId;
+//    private int id;
     private int cardId;
-    private int pinNum;
+    private int pin;
     private Date signupDate; //Do we need java.sql.Date instead?
+    private Date expireDate;
 
     public CardData() {
 
     }
 
-    public CardData(int userId, int cardId, int pinNum, Date signupDate) {
-        this.userId = userId;
+    public CardData(int userId, int cardId, int pinNum, Date signupDate, Date expireDate) {
         this.cardId = cardId;
-        this.pinNum = pinNum;
+        this.pin = pin;
         this.signupDate = signupDate;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+        this.expireDate = expireDate;
     }
 
     public int getCardId() {
@@ -53,5 +37,21 @@ public class CardData implements java.io.Serializable {
 
     public void setSignupDate(Date signupDate) {
         this.signupDate = signupDate;
+    }
+
+    public Date getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(Date expireDate) {
+        this.expireDate = expireDate;
+    }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
     }
 }

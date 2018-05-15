@@ -53,7 +53,7 @@ CREATE TABLE `transaction_history` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `card_id` INT(11) DEFAULT NULL,
   `amount` INT(11) DEFAULT NULL,
-  `transaction_type` VARCHAR(255) DEFAULT NULL, 
+  `transaction_type` ENUM('ADD', 'WITHDRAW'), 
   PRIMARY KEY (`id`),
   FOREIGN KEY (`card_id`) REFERENCES `card`(`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;

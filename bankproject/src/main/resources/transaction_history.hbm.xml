@@ -19,7 +19,7 @@
             <column name="amount"/>
         </property>
 
-        <property name="type" type="java.lang.String">
+        <property name="type" type="com.hibernate.transactionType">
             <column name="transaction_type"/>
         </property>
     </class>
