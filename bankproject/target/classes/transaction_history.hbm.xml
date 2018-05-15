@@ -5,9 +5,7 @@
 
 <hibernate-mapping>
 
-    <class name = "com.hibernate.entity.CardData" table = "card_data">
-
-        <!--SHOULD THIS BE HERE?-->
+    <class name = "com.hibernate.maven.backend.databaseInfo.TransactionHistory" table = "transaction_history">
         <id name="id" type="int">
             <column name="id" />
             <generator class="incriment" />  <!--Necessary?-->
@@ -17,16 +15,12 @@
             <column name="card_id"/>
         </property>
 
-        <property name="pin" type="int">
-            <column name="pin"/>
+        <property name="amt" type="int">
+            <column name="amount"/>
         </property>
 
-        <property name="signupDate" type="timestamp">
-            <column name="signup_date"/>
-        </property>
-
-        <property name="expireDate" type="timestamp">
-            <column name="expire_date"/>
+        <property name="type" type="com.hibernate.transactionType">
+            <column name="transaction_type"/>
         </property>
     </class>
 

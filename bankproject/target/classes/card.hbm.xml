@@ -5,17 +5,21 @@
 
 <hibernate-mapping>
 
-    <class name = "com.hibernate.maven.backend.databaseInfo.CardBalance" table = "card_balance">
+    <class name = "com.hibernate.entity.Card" table = "card">
         <id name="id" type="int">
             <column name="id" />
             <generator class="incriment" />  <!--Necessary?-->
         </id>
 
-        <property name="cardId" type="int">
-            <column name="card_id"/>
+        <property name="userId" type="int">
+            <column name="user_id"/>
         </property>
 
-        <property name="balance" type="int">
+        <property name="cardNumber" type="java.lang.String">
+            <column name="card_number"/>
+        </property>
+
+        <property name="balance" type="double">
             <column name="balance"/>
         </property>
     </class>

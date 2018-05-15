@@ -18,6 +18,6 @@
 
         <!--<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>-->
         <!--<mapping resource="../user.hbm.xml" />-->
-        <mapping class = "com.hibernate.maven.User" />
+        <mapping class = "com.hibernate.entity.User" />
     </session-factory>
 </hibernate-configuration>
