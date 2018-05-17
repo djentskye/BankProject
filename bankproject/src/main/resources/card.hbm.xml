@@ -8,7 +8,7 @@
     <class name = "com.hibernate.entity.Card" table = "card">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="incriment" />  <!--Necessary?-->
+            <generator class="increment" />  <!--Necessary?-->
         </id>
 
         <property name="userId" type="int">
@@ -19,7 +19,7 @@
             <column name="card_number"/>
         </property>
 
-        <property name="balance" type="double">
+        <property name="dBalance" type="double">
             <column name="balance"/>
         </property>
     </class>

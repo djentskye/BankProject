@@ -5,7 +5,6 @@
 
 package com.hibernate;
 
-import com.hibernate.entity.Card;
 import com.hibernate.persistence.HibernateUtil;
 import com.hibernate.service.CardService;
 import org.hibernate.*;

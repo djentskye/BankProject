@@ -1,6 +1,10 @@
 package com.hibernate.entity;
 
+import javax.persistence.Entity;
+
 public class Card {
+
+    private int id;
 
     private int userId;
 
@@ -10,11 +14,23 @@ public class Card {
 
     private double dBalance;
 
+    public Card() {
+
+    }
+
     //Add cardData again, if needed
-    private Card(double balance, String cardNum, int userId) {
+    public Card(double balance, String cardNum, int userId) {
         this.dBalance = balance;
         this.cardNumber = cardNum;
         this.userId = userId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUserId() {
