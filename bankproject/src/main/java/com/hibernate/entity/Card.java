@@ -8,8 +8,6 @@ public class Card {
 
     private int userId;
 
-//    CardData cardData;
-
     private String cardNumber;
 
     private double dBalance;

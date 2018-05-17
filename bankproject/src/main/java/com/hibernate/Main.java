@@ -27,6 +27,8 @@ public class Main {
 
         CardService cardService = new CardService();
 
-        System.out.println(cardService.getCardBalanceByCardId(2));
+//        System.out.println(cardService.getCardBalanceByCardId(2));
+//        cardService.addToCardByCardId(cardService.getCardIdByCardNumber("12345"), 23.54);
+
     }
 }

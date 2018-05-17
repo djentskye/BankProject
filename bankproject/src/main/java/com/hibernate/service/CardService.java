@@ -22,19 +22,12 @@ public class CardService {
     }
 
     public double getCardBalanceByCardId(int id) {
-        int a;
-
         double balance = -4;
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        Transaction tx = null;
-
 
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
 
             session.beginTransaction();
-
-            Query query = session.createQuery("SELECT dBalance FROM Card WHERE id=" + id);
 
             List<Double> cards = session.createQuery("SELECT dBalance FROM Card WHERE id=" + id).list();
 
@@ -44,27 +37,48 @@ public class CardService {
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("There was an error processing the request. ");
-//            return Integer.parseInt(null);
         }
         return balance;
+    }
 
+    public void addToCardByCardId(int id, double amt) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
 
-//        try {
-//            tx = session.beginTransaction();
-//            List<Card> cards = session.createQuery("SELECT dBalance FROM Card WHERE id=" + id).list();
-////            for (Iterator iterator = employees.iterator(); iterator.hasNext();){
-////                Employee employee = (Employee) iterator.next();
-////                System.out.print("First Name: " + employee.getFirstName());
-////                System.out.print("  Last Name: " + employee.getLastName());
-////                System.out.println("  Salary: " + employee.getSalary());
-////            }
-//            Card card = cards.get(0);
-//            tx.commit();
-//        } catch (HibernateException e) {
-//            if (tx!=null) tx.rollback();
-//            e.printStackTrace();
-//        } finally {
-//            session.close();
-//        }
+            session.beginTransaction();
+
+            Card card = (Card)session.get(Card.class, id);
+
+            double newBalance = amt + card.getdBalance();
+
+            card.setdBalance(newBalance);
+
+            session.update(card);
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("There was an error processing the request. ");
+        }
+    }
+
+    public int getCardIdByCardNumber(String cardNum) {
+        int cardId;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+
+            session.beginTransaction();
+
+            List<Integer> cards = session.createQuery("SELECT id FROM Card WHERE cardNumber=" + cardNum).list();
+
+            cardId = cards.get(0);
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("There was an error processing the request. ");
+            cardId = -1;
+        }
+        return cardId;
     }
 }

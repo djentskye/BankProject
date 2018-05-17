@@ -1,6 +1,6 @@
 package com.hibernate.entity;
 
-import com.hibernate.TransactionType;
+//import com.hibernate.TransactionType;
 
 public class TransactionHistory implements java.io.Serializable {
 
@@ -15,7 +15,6 @@ public class TransactionHistory implements java.io.Serializable {
         ADD,
         WITHDRAW
     }
-
 
     public TransactionHistory() {
 

@@ -10,7 +10,7 @@
         <!--SHOULD THIS BE HERE?-->
         <id name="id" type="int">
             <column name="id" />
-            <generator class="incriment" />  <!--Necessary?-->
+            <generator class="increment" />  <!--Necessary?-->
         </id>
 
         <property name="cardId" type="int">

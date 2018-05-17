@@ -5,10 +5,10 @@
 
 <hibernate-mapping>
 
-    <class name = "com.hibernate.maven.backend.databaseInfo.TransactionHistory" table = "transaction_history">
+    <class name = "com.hibernate.entity.TransactionHistory" table = "transaction_history">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="incriment" />  <!--Necessary?-->
+            <generator class="increment" />
         </id>
 
         <property name="cardId" type="int">
@@ -19,9 +19,17 @@
             <column name="amount"/>
         </property>
 
-        <property name="type" type="com.hibernate.transactionType">
+        <property name="type">
             <column name="transaction_type"/>
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.hibernate.TransactionType</param>
+                <!--<param name="type">12</param>-->
+            </type>
         </property>
+
+        <!--<property name="type" type="com.hibernate.transactionType">-->
+            <!--<column name="transaction_type"/>-->
+        <!--</property>-->
     </class>
 
 

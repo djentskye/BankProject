@@ -8,7 +8,7 @@
     <class name = "com.hibernate.entity.User" table = "user">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="incriment" />  <!--Necessary?-->
+            <generator class="increment" />  <!--Necessary?-->
         </id>
 
         <property name="firstName" type="java.lang.String">
