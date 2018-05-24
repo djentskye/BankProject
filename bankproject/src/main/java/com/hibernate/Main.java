@@ -5,11 +5,15 @@
 
 package com.hibernate;
 
+import com.hibernate.entity.User;
+import com.hibernate.io.LoginInput;
 import com.hibernate.persistence.HibernateUtil;
-import com.hibernate.service.CardService;
 import org.hibernate.*;
 
 public class Main {
+
+    public static User currentSession = null;
+//    public static User currentSession = new User();
 
     public static void performTransaction() {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -23,12 +27,19 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        //Get general input, perform transaction, etc.
+        LoginInput.iLoginPage();
 
-        CardService cardService = new CardService();
+        if(currentSession != null) {
 
-//        System.out.println(cardService.getCardBalanceByCardId(2));
+        }
+
+//        CardService cardService = new CardService();
+
+//        System.out.println(cardService.getCardBalanceByCardId(3));
 //        cardService.addToCardByCardId(cardService.getCardIdByCardNumber("12345"), 23.54);
 
+//        UserService userService = new UserService();
+
+//        userService.newUser("Adam", "Alaba", 000000000);
     }
 }

@@ -16,7 +16,7 @@ public class User implements java.io.Serializable {
 
     }
 
-    public User(String firstName, String lastName, int passNum, Date signupDate, Date expireDate) {
+    public User(String firstName, String lastName, int passNum, Date signupDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.passNum = passNum;
