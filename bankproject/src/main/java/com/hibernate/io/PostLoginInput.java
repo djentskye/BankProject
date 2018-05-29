@@ -25,16 +25,14 @@ public class PostLoginInput {
 
         if(a.equals("1")) {
             //TODO: Add modification options for user info
-        }
-        if(a.equals("2")) {
+        } else if(a.equals("2")) {
             CardService cs = new CardService();
 
             cs.newCard();
 
             System.out.println("New card created successfully!");
             iMain();
-        }
-        if(a.equals("3")) {
+        } else if(a.equals("3")) {
             CardService cs = new CardService();
 
             System.out.println("Please enter your card number.");
@@ -43,6 +41,73 @@ public class PostLoginInput {
             if(cardBalance != -4) {
                 System.out.println("The card's balance is $" + cardBalance);
             }
+            iMain();
+        } else if(a.equals("4")) {
+            CardService cs = new CardService();
+
+            int cardId = -1;
+            while(cardId == -1) {
+                try {
+                    System.out.println("Please enter your card number.");
+
+                    cardId = cs.getCardIdByCardNumber(scanner.nextLine());
+                } catch (Exception e) {
+                    System.out.println("This is not valid input.");
+                }
+            }
+
+            double amt = -1.0;
+            while(amt == -1.0) {
+                try {
+                    System.out.println("Please enter the amount to add.");
+                    amt = Double.parseDouble(scanner.nextLine());
+                } catch (Exception e) {
+                    System.out.println("That is not valid input.");
+                }
+            }
+            double cardBalance = cs.addToCardByCardId(cardId, amt);
+            if(cardBalance != -1) {
+                System.out.println("The card's balance is $" + cardBalance);
+            }
+            iMain();
+        } else if(a.equals("5")) {
+            CardService cs = new CardService();
+
+            int cardId = -1;
+            while(cardId == -1) {
+                try {
+                    System.out.println("Please enter your card number.");
+
+                    cardId = cs.getCardIdByCardNumber(scanner.nextLine());
+                } catch (Exception e) {
+                    System.out.println("This is not valid input.");
+                }
+            }
+            double amt = -1.0;
+            while(amt == -1.0) {
+                try {
+                    System.out.println("Please enter the amount to withdraw.");
+                    amt = Double.parseDouble(scanner.nextLine());
+                } catch (Exception e) {
+                    System.out.println("That is not valid input.");
+                }
+            }
+
+            double[] amtWithdrawn = cs.withdrawByCardId(cardId, amt);
+            if(amtWithdrawn[0] != -1.0) {
+                System.out.println("The amount withdrawn is $" + amtWithdrawn[0]);
+            } else {
+                System.out.println("The requested amount could not be withdrawn from the " +
+                        "specified card. ");
+            }
+            if(amtWithdrawn[1] != -1.0) {
+                System.out.println("The amount left in the card is $" + amtWithdrawn[1]);
+            }
+            iMain();
+        } else {
+            System.out.println("Not valid input. Please try again. ");
+            System.out.println("");
+            System.out.println("");
             iMain();
         }
     }

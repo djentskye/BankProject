@@ -16,16 +16,25 @@ public class CardService {
 
             session.beginTransaction();
 
-            Random random = new Random();
-            //CODE FOR GENERATING CARD NUMBERS NEEDS TO BE REPLACED. Previous card numbers
-            //must be factored in as well. We don't want duplicates.
-            String cardNumber = String.valueOf(random.nextInt(99999) + 10000);
+            int a = 1;
+            while(a == 1) {
+                try {
+                    Random random = new Random();
+                    //CODE FOR GENERATING CARD NUMBERS NEEDS TO BE REPLACED. Previous card numbers
+                    //must be factored in as well. We don't want duplicates.
+                    String cardNumber = String.valueOf(random.nextInt(99999) + 10000);
 
-            Card card = new Card(0.0, cardNumber, Main.currentSession.getId());
+                    Card card = new Card(0.0, cardNumber, Main.currentSession.getId());
 
-            System.out.println("New card number is " + cardNumber);
+                    System.out.println("New card number is " + cardNumber);
 
-            session.save(card);
+                    session.save(card);
+
+                    a = 2;
+                } catch (Exception e) {
+                    System.out.println("Attempted to create card.");
+                }
+            }
 
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -76,25 +85,30 @@ public class CardService {
         return balance;
     }
 
-    public void addToCardByCardId(int id, double amt) {
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+    public double addToCardByCardId(int id, double amt) {
+        double rVal = -1.0;
+        if(amt>0) {
+            try {
+                Session session = HibernateUtil.getSessionFactory().openSession();
 
-            session.beginTransaction();
+                session.beginTransaction();
 
-            Card card = (Card)session.get(Card.class, id);
+                Card card = (Card) session.get(Card.class, id);
 
-            double newBalance = amt + card.getdBalance();
+                double newBalance = amt + card.getdBalance();
+                rVal = newBalance;
 
-            card.setdBalance(newBalance);
+                card.setdBalance(newBalance);
 
-            session.update(card);
+                session.update(card);
 
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println(e);
-            System.out.println("There was an error processing the request. ");
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("There was an error processing the request. ");
+            }
         }
+        return rVal;
     }
 
     public int getCardIdByCardNumber(String cardNum) {
@@ -115,5 +129,33 @@ public class CardService {
             cardId = -1;
         }
         return cardId;
+    }
+
+    public double[] withdrawByCardId(int id, double amtToWithdraw) {
+        //rVal[1] stores the amount left in the account, rVal[0] stores the amout withdrawn
+        double rVal[] = {-1.0, -1.0};
+        if (amtToWithdraw > 0.0) {
+            try {
+                Session session = HibernateUtil.getSessionFactory().openSession();
+
+                session.beginTransaction();
+
+                Card card = (Card) session.get(Card.class, id);
+
+                if (card.getdBalance() > amtToWithdraw) {
+                    rVal[1] = card.getdBalance() - amtToWithdraw;
+                    card.setdBalance(rVal[1]);
+                    rVal[0] = amtToWithdraw;
+                }
+
+                session.update(card); //Do we need this?
+
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("There was an error processing the request. ");
+            }
+        }
+        return rVal;
     }
 }

@@ -1,11 +1,9 @@
 package com.hibernate.service;
 
-import com.hibernate.entity.Card;
 import com.hibernate.entity.User;
 import com.hibernate.persistence.HibernateUtil;
 import org.hibernate.Session;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
