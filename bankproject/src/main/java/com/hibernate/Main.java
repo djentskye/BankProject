@@ -6,6 +6,8 @@
 package com.hibernate;
 
 import com.hibernate.entity.User;
+import com.hibernate.gui.LoginWindow;
+import com.hibernate.gui.MainWindow;
 import com.hibernate.io.LoginInput;
 import com.hibernate.persistence.HibernateUtil;
 import org.hibernate.*;
@@ -27,19 +29,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        LoginInput.iLoginPage();
-
-        if(currentSession != null) {
-
-        }
-
-//        CardService cardService = new CardService();
-
-//        System.out.println(cardService.getCardBalanceByCardId(3));
-//        cardService.addToCardByCardId(cardService.getCardIdByCardNumber("12345"), 23.54);
-
-//        UserService userService = new UserService();
-
-//        userService.newUser("Adam", "Alaba", 000000000);
+        LoginWindow.loginWindow();
+//        LoginInput.iLoginPage();
     }
 }

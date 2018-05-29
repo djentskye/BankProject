@@ -1,5 +1,6 @@
 package com.hibernate.io;
 
+import com.hibernate.persistence.HibernateUtil;
 import com.hibernate.service.CardService;
 
 import java.util.Scanner;
@@ -17,6 +18,7 @@ public class PostLoginInput {
         System.out.println("3. Get Card Balance");
         System.out.println("4. Add to Card");
         System.out.println("5. Withdraw from Card");
+        System.out.println("6. Quit");
         //TODO: We need a new option for listing card information
 
         Scanner scanner = new Scanner(System.in);
@@ -104,6 +106,8 @@ public class PostLoginInput {
                 System.out.println("The amount left in the card is $" + amtWithdrawn[1]);
             }
             iMain();
+        } else if (a.equals("6")) {
+            HibernateUtil.shutdown();
         } else {
             System.out.println("Not valid input. Please try again. ");
             System.out.println("");
