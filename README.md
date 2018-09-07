@@ -20,3 +20,7 @@ Node.js
 Ember.js
 Watchman
 Postman (Optional)
+
+JWT Guides: 
+https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java
+https://www.toptal.com/web/cookie-free-authentication-with-json-web-tokens-an-example-in-laravel-and-angularjs
