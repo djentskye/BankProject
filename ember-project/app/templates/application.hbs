@@ -1,4 +1,4 @@
-<div class="jumbo">
+<div>
 	<h1>Banking Website</h1>
 	<ul>
 		{{#link-to 'index'}}
@@ -6,10 +6,22 @@
 		{{/link-to}}
 	</ul>
 	<ul>
-		{{#link-to 'index'}}
-			<li>djent</li>
+		{{#link-to 'about'}}
+			<li>About</li>
 		{{/link-to}}
 	</ul>
+  <ul>
+    {{#link-to 'signin'}}
+      <li>Log In</li>
+    {{/link-to}}
+  </ul>
+  <ul>
+    {{#link-to 'signup'}}
+      <li>Sign Up</li>
+    {{/link-to}}
+  </ul>
+  <br>
+  <br>
 </div>
 
 {{outlet}}
