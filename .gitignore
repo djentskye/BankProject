@@ -32,3 +32,22 @@ EmberTesting/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+
+ember-project/.editorconfig
+ember-project/.ember-cli
+ember-project/.eslintignore
+ember-project/.idea/
+ember-project/.eslintrc.js
+ember-project/.gitignore
+ember-project/.travis.yml
+ember-project/.watchmanconfig
+ember-project/config/
+ember-project/ember-cli-build.js
+ember-project/package-lock.json
+ember-project/package.json
+ember-project/public/
+ember-project/testem.js
+ember-project/tests/
+ember-project/vendor/
