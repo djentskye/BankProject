@@ -1,6 +1,8 @@
 package com.hibernate.service;
 
+import com.hibernate.Main;
 import com.hibernate.entity.User;
+import com.hibernate.entity.UserData;
 import com.hibernate.persistence.HibernateUtil;
 import org.hibernate.Session;
 
@@ -78,5 +80,15 @@ public class UserService {
             output = null;
         }
         return output;
+    }
+
+    public UserData getUserInfo(int userId) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        session.beginTransaction();
+
+        UserData userData = (UserData)session.get(UserData.class, userId);
+
+        return userData;
     }
 }

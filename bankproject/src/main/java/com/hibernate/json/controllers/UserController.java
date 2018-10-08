@@ -1,6 +1,7 @@
 package com.hibernate.json.controllers;
 
 import com.hibernate.entity.User;
+import com.hibernate.entity.UserData;
 import com.hibernate.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import java.util.Map;
 @RestController
 public class UserController {
 
-    @RequestMapping("/logins")
+    @RequestMapping("/login")
     public ResponseEntity<Map<String, User>> login(@RequestParam(value="firstname") String firstName, @RequestParam(value="lastname") String lastName, @RequestParam(value="passnum") int passNum) {
         UserService us = new UserService();
         User user = us.login(firstName, lastName, passNum);
@@ -24,5 +25,13 @@ public class UserController {
             return new ResponseEntity<>(map, HttpStatus.OK);
         }
         return new ResponseEntity<>(map, HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping("/showuserdata")
+    public ResponseEntity<Map<String, User>> showUserData(@RequestParam(value = "firstname") String firstName, @RequestParam(value="lastname") String lastName, @RequestParam(value="passnum") int passNum) {
+
+//WIP
+
+        return new ResponseEntity<>();
     }
 }
