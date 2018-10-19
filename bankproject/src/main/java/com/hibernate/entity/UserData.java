@@ -1,14 +1,21 @@
 package com.hibernate.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "user_data")
 public class UserData implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
     private int id;
+    @Column(name = "gender")
     private String gender;
+    @Column(name = "birthdate")
     private Date birthdate;
+    @Column(name = "address")
     private String address;
 
     public UserData() {
@@ -43,7 +50,7 @@ public class UserData implements java.io.Serializable {
         return address;
     }
 
-    public void setAddress(String passNum) {
+    public void setAddress(String address) {
         this.address = address;
     }
 }

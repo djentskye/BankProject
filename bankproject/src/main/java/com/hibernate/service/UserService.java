@@ -3,13 +3,16 @@ package com.hibernate.service;
 import com.hibernate.Main;
 import com.hibernate.entity.User;
 import com.hibernate.entity.UserData;
+import com.hibernate.mapping.UserMapping;
 import com.hibernate.persistence.HibernateUtil;
 import org.hibernate.Session;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+@Service
 public class UserService {
 
     public int getUserIdByPassNum(int passNum) {
@@ -63,7 +66,7 @@ public class UserService {
 
             int userId = getUserIdByPassNum(passNum);
 
-            User user = (User)session.get(User.class, userId);
+            User user = session.get(User.class, userId);
 
             if(Objects.equals(user.getFirstName(), firstName) && Objects.equals(user.getLastName(), lastName)) {
                 System.out.println("Login successful!");
@@ -82,13 +85,21 @@ public class UserService {
         return output;
     }
 
-    public UserData getUserInfo(int userId) {
+    public User getUserInfo(int userId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         session.beginTransaction();
 
-        UserData userData = (UserData)session.get(UserData.class, userId);
+        User user = session.get(User.class, userId);
 
-        return userData;
+        UserMapping um = new UserMapping();
+        UserData userdata = um.getUserData(session, userId);
+
+        user.setUserData(userdata);
+//        user.setAddress(userMapping.getAddress());
+//        user.setBirthdate(userMapping.getBirthdate());
+//        user.setGender(userMapping.getGender());
+
+        return user;
     }
 }

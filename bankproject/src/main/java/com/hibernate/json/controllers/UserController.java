@@ -3,17 +3,20 @@ package com.hibernate.json.controllers;
 import com.hibernate.entity.User;
 import com.hibernate.entity.UserData;
 import com.hibernate.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 public class UserController {
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/login")
     public ResponseEntity<Map<String, User>> login(@RequestParam(value="firstname") String firstName, @RequestParam(value="lastname") String lastName, @RequestParam(value="passnum") int passNum) {
@@ -27,11 +30,19 @@ public class UserController {
         return new ResponseEntity<>(map, HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping("/showuserdata")
-    public ResponseEntity<Map<String, User>> showUserData(@RequestParam(value = "firstname") String firstName, @RequestParam(value="lastname") String lastName, @RequestParam(value="passnum") int passNum) {
+//    @RequestMapping("/showuserdata")
+//    public ResponseEntity<Map<String, User>> showUserData(@RequestParam(value = "firstname") String firstName, @RequestParam(value="lastname") String lastName) {
+//
+////WIP
+//
+//        return new ResponseEntity<>();
+//    }
 
-//WIP
+    @RequestMapping(value = "/showData", method = RequestMethod.POST)
+    public @ResponseBody User showData(@RequestBody User user) {
+        int userId = userService.getUserIdByPassNum(user.getPassNum());
+//        userService.getUserInfo(userId);
 
-        return new ResponseEntity<>();
+        return userService.getUserInfo(userId);
     }
 }
