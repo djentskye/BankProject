@@ -41,8 +41,6 @@ public class UserController {
     @RequestMapping(value = "/showData", method = RequestMethod.POST)
     public @ResponseBody User showData(@RequestBody User user) {
         int userId = userService.getUserIdByPassNum(user.getPassNum());
-//        userService.getUserInfo(userId);
-
         return userService.getUserInfo(userId);
     }
 }
