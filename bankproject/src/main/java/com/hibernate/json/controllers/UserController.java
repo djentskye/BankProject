@@ -27,7 +27,8 @@ public class UserController {
         Map<String, User> map = new HashMap<>();
         if(user != null) {
             map.put("user", user);
-            String token = JwtGenerateToken.newToken(String.valueOf(map));
+//            String token = JwtGenerateToken.newToken(String.valueOf(map));
+            String token = JwtGenerateToken.newUserToken(user);
             return new ResponseEntity<>(token, HttpStatus.OK);
         }
         return new ResponseEntity(map, HttpStatus.NO_CONTENT);
@@ -46,17 +47,15 @@ public class UserController {
 //        return new ResponseEntity<>(map, HttpStatus.NO_CONTENT);
 //    }
 
-//    @RequestMapping("/showuserdata")
-//    public ResponseEntity<Map<String, User>> showUserData(@RequestParam(value = "firstname") String firstName, @RequestParam(value="lastname") String lastName) {
-//
-////WIP
-//
-//        return new ResponseEntity<>();
-//    }
-
     @RequestMapping(value = "/showData", method = RequestMethod.POST)
     public @ResponseBody User showData(@RequestBody User user) {
         int userId = userService.getUserIdByPassNum(user.getPassNum());
         return userService.getUserInfo(userId);
     }
+
+//    @RequestMapping(value = "/showData", method = RequestMethod.POST)
+//    public @ResponseBody User showData(@RequestBody User user) {
+//        int userId = userService.getUserIdByPassNum(user.getPassNum());
+//        return userService.getUserInfo(userId);
+//    }
 }

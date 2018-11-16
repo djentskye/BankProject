@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.hibernate.entity.User;
 
 public class JwtGenerateToken {
 
@@ -15,6 +16,22 @@ public class JwtGenerateToken {
             Algorithm algorithm = Algorithm.HMAC256("abcd");
             token = JWT.create()
                     .withIssuer("bankproject")
+                    .sign(algorithm);
+        } catch (JWTCreationException exception) {
+            System.out.println(exception);
+            token = null;
+        }
+        return token;
+    }
+
+    public static String newUserToken(User toEncrypt) {
+        String token = null;
+        try {
+            Algorithm algorithm = Algorithm.HMAC256("abcd");
+            token = JWT.create()
+                    .withIssuer("bankproject")
+                    .withClaim("first_name", toEncrypt.getFirstName())
+                    .withClaim("last_name", toEncrypt.getLastName())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
             System.out.println(exception);
