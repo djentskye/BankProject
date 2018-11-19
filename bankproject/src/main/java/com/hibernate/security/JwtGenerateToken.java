@@ -30,8 +30,7 @@ public class JwtGenerateToken {
             Algorithm algorithm = Algorithm.HMAC256("abcd");
             token = JWT.create()
                     .withIssuer("bankproject")
-                    .withClaim("first_name", toEncrypt.getFirstName())
-                    .withClaim("last_name", toEncrypt.getLastName())
+                    .withClaim("username", toEncrypt.getFirstName() + toEncrypt.getLastName())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
             System.out.println(exception);
