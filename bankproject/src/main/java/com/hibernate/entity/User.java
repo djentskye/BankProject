@@ -5,8 +5,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "user")
-//@SecondaryTable(name = "user_data",
-//    pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id"))
 public class User implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,17 +18,12 @@ public class User implements java.io.Serializable {
     private String firstName;
     @Column(table = "last_name")
     private String lastName;
+    @Column(table = "username")
+    private String userName;
     @Column(table = "passport_number")
     private int passNum;
     @Column(table = "signup_date")
     private Date signupDate; //Do we need java.sql.Date instead?
-
-//    @Column(table = "gender")
-//    private String gender;
-//    @Column(table = "birthdate")
-//    private Date birthDate;
-//    @Column(table = "address")
-//    private String address;
 
     private UserData userData;
 
@@ -38,22 +31,13 @@ public class User implements java.io.Serializable {
 
     }
 
-    public User(String firstName, String lastName, int passNum, Date signupDate) {
+    public User(String firstName, String lastName, String userName, int passNum, Date signupDate) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.userName = userName;
         this.passNum = passNum;
         this.signupDate = signupDate;
     }
-
-//    public User(String firstName, String lastName, int passNum, Date signupDate, String gender, Date birthdate, String address) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.passNum = passNum;
-//        this.signupDate = signupDate;
-//        this.gender = gender;
-//        this.birthDate = birthdate;
-//        this.address = address;
-//    }
 
     public int getId() { return this.id; }
 
@@ -91,27 +75,13 @@ public class User implements java.io.Serializable {
         this.signupDate = signupDate;
     }
 
-//    public String getGender() {
-//        return gender;
-//    }
-//
-//    public void setGender(String gender) {
-//        this.gender = gender;
-//    }
-//
-//    public Date getBirthdate() { return birthDate; }
-//
-//    public void setBirthdate(Date birthdate) {
-//        this.birthDate = birthdate;
-//    }
-//
-//    public String getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(String passNum) {
-//        this.address = address;
-//    }
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public UserData getUserData() {
         return userData;
@@ -119,5 +89,27 @@ public class User implements java.io.Serializable {
 
     public void setUserData(UserData userData) {
         this.userData = userData;
+    }
+
+    public String toString() {
+        String r = new String();
+        r += "id:          ";
+        r += this.id;
+        r += "\n";
+        r += "first name:  ";
+        r += this.firstName;
+        r += "\n";
+        r += "last name:   ";
+        r += this.lastName;
+        r += "\n";
+        r += "username:    ";
+        r += this.userName;
+        r += "\n";
+        r += "passnum:     ";
+        r += this.passNum;
+        r += "\n";
+        r += "signup date: ";
+        r += this.signupDate;
+        return r;
     }
 }

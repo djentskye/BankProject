@@ -1,6 +1,5 @@
 package com.hibernate.service;
 
-import com.hibernate.Main;
 import com.hibernate.entity.User;
 import com.hibernate.entity.UserData;
 import com.hibernate.mapping.UserMapping;
@@ -35,7 +34,7 @@ public class UserService {
         return userId;
     }
 
-    public void newUser(String firstName, String lastName, int passNum) {
+    public void newUser(String firstName, String lastName, String userName, int passNum) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -43,7 +42,7 @@ public class UserService {
 
             Date date = new Date();
 
-            User user = new User(firstName, lastName, passNum, date);
+            User user = new User(firstName, lastName, userName, passNum, date);
 
             session.save(user);
 
@@ -54,8 +53,9 @@ public class UserService {
         }
     }
 
+
     //TODO: Have login return an id, maybe passNum?  RETURN USER
-    public User login(String firstName, String lastName, int passNum) {
+    public User login(String userName, int passNum) {
         User output = new User();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -68,7 +68,7 @@ public class UserService {
 
             User user = session.get(User.class, userId);
 
-            if(Objects.equals(user.getFirstName(), firstName) && Objects.equals(user.getLastName(), lastName)) {
+            if(Objects.equals(user.getUserName(), userName)) {
                 System.out.println("Login successful!");
                 output = user;
             } else {
@@ -96,9 +96,6 @@ public class UserService {
         UserData userdata = um.getUserData(session, userId);
 
         user.setUserData(userdata);
-//        user.setAddress(userMapping.getAddress());
-//        user.setBirthdate(userMapping.getBirthdate());
-//        user.setGender(userMapping.getGender());
 
         return user;
     }

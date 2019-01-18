@@ -40,17 +40,17 @@ public class LoginInput {
             System.out.println("Please enter valid input. ");
         }
 
-        try {
-            User newUser = us.login(f, l, pass);
-            if(newUser != null) {
-                Main.currentSession = newUser;
-            } else {
-                throw new Exception();
-            }
-            PostLoginInput.iMain();
-        } catch(Exception e) {
-            iLogin();
-        }
+//        try {
+//            User newUser = us.login(f, l, pass);
+//            if(newUser != null) {
+//                Main.currentSession = newUser;
+//            } else {
+//                throw new Exception();
+//            }
+//            PostLoginInput.iMain();
+//        } catch(Exception e) {
+//            iLogin();
+//        }
     }
 
     public static void iNewUser() {
@@ -72,7 +72,7 @@ public class LoginInput {
             //Split up parts into modules
         }
 
-        us.newUser(f, l, pass);
+        /*us.newUser(f, l, pass);
 
         try {
             User newUser = us.login(f, l, pass);
@@ -84,6 +84,6 @@ public class LoginInput {
             PostLoginInput.iMain();
         } catch(Exception e) {
             iLogin(); //This shouldn't happen, only if the database info is different
-        }
+        }*/
     }
 }
