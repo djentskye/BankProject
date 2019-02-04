@@ -1,45 +1,57 @@
 package com.hibernate.service;
 
+import com.hibernate.CardType;
 import com.hibernate.Main;
 import com.hibernate.entity.Card;
 import com.hibernate.persistence.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
 
+@Service
 public class CardService {
 
-    public void newCard() {
+    public Card newCard(CardType cardType, int userId) {
+        Card card = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
 
             session.beginTransaction();
 
             int a = 1;
-            while(a == 1) {
+            while (a == 1) {
                 try {
                     Random random = new Random();
                     //CODE FOR GENERATING CARD NUMBERS NEEDS TO BE REPLACED. Previous card numbers
                     //must be factored in as well. We don't want duplicates.
                     String cardNumber = String.valueOf(random.nextInt(99999) + 10000);
+                    int pinNumber = random.nextInt(999);
 
-                    Card card = new Card(0.0, cardNumber, Main.currentSession.getId());
+                    card = new Card(cardType, 0.0, cardNumber, userId, pinNumber);
 
                     System.out.println("New card number is " + cardNumber);
 
                     session.save(card);
+                    if (session.getTransaction().getStatus()!= TransactionStatus.COMMITTED) {
+                        session.getTransaction().commit();
+                    }
 
                     a = 2;
                 } catch (Exception e) {
                     System.out.println("Attempted to create card.");
+                    a = 0;
                 }
             }
 
-            session.getTransaction().commit();
+//            session.getTransaction().commit();
+            return card;
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("There was an error processing the request. ");
+            return null;
         }
     }
 
@@ -47,7 +59,6 @@ public class CardService {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         session.beginTransaction();
-
 
 
         session.getTransaction().commit();
@@ -66,7 +77,7 @@ public class CardService {
             List<Integer> ids = session.createQuery("SELECT userId FROM Card WHERE " +
                     "id=" + id).list();
 
-            if(Main.currentSession.getId() == ids.get(0)) {
+            if (Main.currentSession.getId() == ids.get(0)) {
                 List<Double> cards = session.createQuery("SELECT dBalance FROM Card " +
                         "WHERE id=" + id).list();
 
@@ -87,7 +98,7 @@ public class CardService {
 
     public double addToCardByCardId(int id, double amt) {
         double rVal = -1.0;
-        if(amt>0) {
+        if (amt > 0) {
             try {
                 Session session = HibernateUtil.getSessionFactory().openSession();
 

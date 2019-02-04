@@ -99,4 +99,40 @@ public class UserService {
 
         return user;
     }
+
+    public User modifyUser(User uData) {
+        boolean isUpdated = false;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        session.beginTransaction();
+
+        User user = session.get(User.class, uData.getId());
+
+        if(uData.getUserName() != null) {
+            user.setUserName(uData.getUserName());
+            isUpdated = true;
+        }
+        if(uData.getPassNum() != 0) {
+            user.setPassNum(uData.getPassNum());
+            isUpdated = true;
+        }
+        if(uData.getFirstName() != null) {
+            user.setFirstName(uData.getFirstName());
+            isUpdated = true;
+        }
+        if(uData.getLastName() != null) {
+            user.setLastName(uData.getLastName());
+            isUpdated = true;
+        }
+        if(uData.getUserData() != null) {
+            //TODO: Update code to include *Modify userData* part
+        }
+
+        if(isUpdated = true) {
+            session.getTransaction().commit();
+            return user;  //?
+        } else {
+            return null;
+        }
+    }
 }

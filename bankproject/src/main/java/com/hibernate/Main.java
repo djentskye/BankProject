@@ -14,8 +14,12 @@ import com.hibernate.persistence.HibernateUtil;
 import org.hibernate.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
 
 @SpringBootApplication
+//@ComponentScan({"com.hibernate.service"})
 public class Main {
 
     public static User currentSession = null;

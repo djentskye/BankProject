@@ -30,7 +30,7 @@ public class PostLoginInput {
         } else if(a.equals("2")) {
             CardService cs = new CardService();
 
-            cs.newCard();
+//            cs.newCard();
 
             System.out.println("New card created successfully!");
             iMain();

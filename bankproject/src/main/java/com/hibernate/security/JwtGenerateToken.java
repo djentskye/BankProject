@@ -8,6 +8,8 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.hibernate.entity.User;
 
+import java.util.Date;
+
 public class JwtGenerateToken {
 
     public static String newToken(String toEncrypt) {
@@ -32,6 +34,7 @@ public class JwtGenerateToken {
                     .withIssuer("bankproject")
                     .withClaim("username", toEncrypt.getUserName())
                     .withClaim("passnum", toEncrypt.getPassNum())
+                    .withExpiresAt(new Date())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
             System.out.println(exception);

@@ -18,6 +18,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public ResponseEntity<String> register(@RequestParam(value="first_name") String firstName, @RequestParam(value="last_name") String lastName, @RequestParam(value="username") String username, @RequestParam(value="passnum") int passnum) {
+        userService.newUser(firstName, lastName, username, passnum);
+        User u = userService.login(username, passnum);
+        Map<String, User> map = new HashMap<>();
+        if(u != null) {
+            map.put("user", u);
+            String token = JwtGenerateToken.newUserToken(u);
+            return new ResponseEntity<>(token, HttpStatus.OK);
+        }
+        return new ResponseEntity(map, HttpStatus.NO_CONTENT);
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ResponseEntity<String> login(@RequestParam(value="username") String username, @RequestParam(value="passnum") int passNum) {
         UserService us = new UserService();
@@ -47,5 +60,17 @@ public class UserController {
             System.out.println("ERROR 2");
             return new ResponseEntity<User>(a, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    /**
+     * The User parameter MUST include what will be changed AND the ID of the user.
+     *
+     * @param uData
+     * @return
+     */
+    @RequestMapping(path = "/modifyUserData", method = RequestMethod.PATCH, consumes = "application/json")
+    public @ResponseBody ResponseEntity<User> modifyUserData(@RequestBody User uData) {
+//        User userToModify = userService.getUserInfo(uData.getId());
+        return new ResponseEntity<User>(userService.modifyUser(uData), HttpStatus.OK);
     }
 }

@@ -15,12 +15,35 @@
             <column name="user_id"/>
         </property>
 
+
+
+        <property name="cardType" type="com.hibernate.CardType" not-null="true">
+            <column name="card_type"/>
+        </property>
+
+
+
+
+
+
         <property name="cardNumber" type="java.lang.String">
             <column name="card_number"/>
         </property>
 
+        <property name="pin" type="int">
+            <column name="pin"/>
+        </property>
+
         <property name="dBalance" type="double">
             <column name="balance"/>
+        </property>
+
+        <property name="signupDate" type="timestamp">
+            <column name="signup_date"/>
+        </property>
+
+        <property name="expireDate" type="timestamp">
+            <column name="expire_date"/>
         </property>
     </class>
 
