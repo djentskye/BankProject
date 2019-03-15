@@ -48,6 +48,7 @@ public class UserController {
     public @ResponseBody ResponseEntity<User> showData(@RequestHeader(value="Authorization") String token) {
         User a = JwtDecodeToken.decodeUserJwt(token);
         if (a.getUserName()!=null && a.getPassNum()!=0) {
+            userService = new UserService(); //TODO: TO REMOVE
             int userId = userService.getUserIdByPassNum(a.getPassNum());
             if(userId!=-1) {
                 User rUser = userService.getUserInfo(userId);
